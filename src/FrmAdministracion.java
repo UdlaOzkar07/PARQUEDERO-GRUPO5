@@ -18,14 +18,32 @@ public class FrmAdministracion {
     private JPanel JPBotonesUsuario;
     private JButton btnNuevoUsuario;
 
+
     public static void main(String[] args) {
+
         JFrame frame = new JFrame("Administracion");
-        frame.setContentPane(new FrmAdministracion().Admin);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        //frame.pack();
-        frame.setSize(900,600);
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
+        FrmAdministracion frmAdministracion=new FrmAdministracion();
+        FrmLogin frmlogin= new FrmLogin(frmAdministracion.listaUsuario);
+        boolean p = true;
+        //if (p==false){
+            frmlogin.setTitle("Login");
+            frmlogin.setSize(400,400);
+            //frmlogin.setLocationRelativeTo(Admin);
+            frmlogin.setVisible(true);
+            frmlogin.setDefaultCloseOperation(frmlogin.EXIT_ON_CLOSE);
+
+
+
+        //}else {
+            frame.setContentPane(frmAdministracion.Admin);
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            //frame.pack();
+            frame.setSize(900,600);
+            frame.setLocationRelativeTo(null);
+            frame.setVisible(true);
+            p=true;
+        //}
+        System.exit(0);
     }
 
     public FrmAdministracion() {
@@ -91,5 +109,9 @@ public class FrmAdministracion {
         }
 
         tblUsuario.setModel(modeloTabla);
+    }
+
+    public JPanel getAdmin() {
+        return Admin;
     }
 }

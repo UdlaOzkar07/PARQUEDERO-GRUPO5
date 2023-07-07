@@ -23,4 +23,19 @@ public class ListaUsuario {
     public Usuario obtenerUsuario(int index){
         return  usuarios.get(index);
     }
+    public Usuario buscarId(String usuario){
+        for (Usuario usr: usuarios){
+            if (usuario.compareTo(usr.getIdUsuario())==0)
+                return usr;
+        }
+        return null;
+    }
+
+    public boolean vaidarUsuario(String usuario,String contrasena){
+        Usuario user= buscarId(usuario);
+        if (user!=null && user.getIdUsuario().compareTo(contrasena)==0){
+            return true;
+        }else
+            return false;
+    }
 }
