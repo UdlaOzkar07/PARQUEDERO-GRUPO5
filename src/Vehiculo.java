@@ -4,16 +4,12 @@ import java.util.Date;
 public class Vehiculo {
     private String placa;
     private String tipoVehiculo;
-    private Date fecha;
-    private Time horaEntrada;
-    private Time horaSalida;
+    private String marca;
 
-    public Vehiculo(String placa, String tipoVehiculo, Date fecha, Time horaEntrada, Time horaSalida) {
+    public Vehiculo(String placa, String tipoVehiculo, String marca) {
         this.placa = placa;
         this.tipoVehiculo = tipoVehiculo;
-        this.fecha = fecha;
-        this.horaEntrada = horaEntrada;
-        this.horaSalida = horaSalida;
+        this.marca = marca;
     }
 
     public String getPlaca() {
@@ -23,17 +19,8 @@ public class Vehiculo {
     public String getTipoVehiculo() {
         return tipoVehiculo;
     }
-
-    public Date getFecha() {
-        return fecha;
-    }
-
-    public Time getHoraEntrada() {
-        return horaEntrada;
-    }
-
-    public Time getHoraSalida() {
-        return horaSalida;
+    public String getMarca() {
+        return marca;
     }
 
     public void setPlaca(String placa) {
@@ -44,16 +31,8 @@ public class Vehiculo {
         this.tipoVehiculo = tipoVehiculo;
     }
 
-    public void setFecha(Date fecha) {
-        this.fecha = fecha;
-    }
-
-    public void setHoraEntrada(Time horaEntrada) {
-        this.horaEntrada = horaEntrada;
-    }
-
-    public void setHoraSalida(Time horaSalida) {
-        this.horaSalida = horaSalida;
+    public void setMarca(String marca) {
+        this.tipoVehiculo = marca;
     }
 
     @Override
@@ -61,9 +40,7 @@ public class Vehiculo {
         return "Vehiculo{" +
                 "placa='" + placa + '\'' +
                 ", tipoVehiculo='" + tipoVehiculo + '\'' +
-                ", fecha=" + fecha +
-                ", horaEntrada=" + horaEntrada +
-                ", horaSalida=" + horaSalida +
+                ", marca=" + marca +
                 '}';
     }
 }

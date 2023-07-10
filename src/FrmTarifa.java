@@ -1,26 +1,34 @@
 import javax.swing.*;
 import java.awt.event.*;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
-public class FrmParquear extends JDialog {
+public class FrmTarifa extends JDialog {
     private JPanel contentPane;
     private JButton buttonOK;
     private JButton buttonCancel;
-    private JLabel lblTipoVehiculo;
-    private JComboBox cbxTipoVehiculo;
-    private JLabel lblMarca;
-    private JComboBox cbxMarca;
-    private JTextField txtPlaca;
-    private JLabel lblPlaca;
-    private JLabel lblDateTime;
-    private JLabel lblTitulo;
+    private JTextField txtIdTarifa;
+    private JTextField txtValorTarifa;
+    private JComboBox cbxTipoVehiculoTarifa;
+    private JLabel lblIdTarifa;
+    private JLabel lblTipoVehiculoTarifa;
+    private JLabel lblTarifa;
+    private int index;
+    private ListaTarifa listaTarifa;
 
-    public FrmParquear() {
+    public FrmTarifa(ListaTarifa listaTarifa,int index) {
         setContentPane(contentPane);
         setModal(true);
         getRootPane().setDefaultButton(buttonOK);
 
+        this.index = index;
+        this.listaTarifa = listaTarifa;
+
+        if (index >= 0) {
+            Tarifa tarifa = listaTarifa.obtenerTarifa(index);
+            txtIdTarifa.setEditable(false);
+            txtIdTarifa.setText(Integer.toString(tarifa.getIdTarifa()));
+            cbxTipoVehiculoTarifa.getEditor().setItem(tarifa.getTipoVehiculo());
+            txtValorTarifa.setText(Double.toString(tarifa.getValorTarifa()));
+        }
         buttonOK.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 onOK();
@@ -47,26 +55,27 @@ public class FrmParquear extends JDialog {
                 onCancel();
             }
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
-
-        String dateTime = DateTimeFormatter.ofPattern("MMM dd yyyy, hh:mm:ss a").format(LocalDateTime.now());
-        lblDateTime.setText(dateTime);
     }
 
     private void onOK() {
         // add your code here
+        int idTarifa = Integer.parseInt(txtIdTarifa.getText());
+        String tipoVehiculo = cbxTipoVehiculoTarifa.getSelectedItem().toString();
+        Double valorTarifa = Double.parseDouble(txtValorTarifa.getText());
+
+        Tarifa tarifa = new Tarifa(idTarifa,tipoVehiculo,valorTarifa);
+
+        if (index < 0)
+        {
+            listaTarifa.agregarTarifa(tarifa);
+        }else{
+            listaTarifa.actualizarTarifa(tarifa,index);
+        }
         dispose();
     }
 
     private void onCancel() {
         // add your code here if necessary
         dispose();
-    }
-
-    public static void main(String[] args) {
-        FrmParquear dialog = new FrmParquear();
-        //dialog.pack();
-        dialog.setSize(400,400);
-        dialog.setVisible(true);
-        System.exit(0);
     }
 }

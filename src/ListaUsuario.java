@@ -31,7 +31,7 @@ public class ListaUsuario {
         return null;
     }
 
-    public boolean vaidarUsuario(String usuario,String contrasena){
+    public boolean validarUsuario(String usuario,String contrasena){
         Usuario user= buscarId(usuario);
         if (user!=null && user.getIdUsuario().compareTo(contrasena)==0){
             return true;
